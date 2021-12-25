@@ -1,0 +1,46 @@
+@use "../../../style" as *;
+
+:host {
+  @include page-host;
+  mat-card {
+    margin: auto;
+    .form-container {
+      display: flex;
+      flex-direction: column;
+      &__inputs {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        *:not(:first-child) {
+          margin-left: 5px;
+        }
+        button {
+          margin-bottom: 1.34375em;
+        }
+
+      }
+      button {
+        margin-bottom: 1em;
+      }
+    }
+    .result-string {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      text-align: center;
+      padding: 0.5em;
+      font-size: 1.3em;
+      font-weight: bold;
+      span:not(:first-child) {
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+
+@media (max-width: 900px) {
+  .form-container__inputs, .result-string {
+    flex-direction: column;;
+  }
+}

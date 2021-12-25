@@ -1,0 +1,68 @@
+<mat-card>
+  <mat-card-title>Converter</mat-card-title>
+  <form
+    *ngIf="form"
+    class="form-container"
+    [formGroup]="form"
+    (ngSubmit)="onSubmit()"
+  >
+    <div class="form-container__inputs">
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
+        <input
+          formControlName="amount"
+          matInput
+          type="number"
+          class="example-right-align"
+          placeholder="0"
+        />
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>From</mat-label>
+        <mat-select formControlName="from">
+          <mat-option
+            *ngFor="let currency of currencies"
+            [value]="currency.code"
+            >{{ currency.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+      <button
+        (click)="switchCoins($event)"
+        mat-mini-fab
+        color="primary"
+        aria-label="Swap Coins"
+      >
+        <mat-icon>compare_arrows</mat-icon>
+      </button>
+      <mat-form-field appearance="outline">
+        <mat-label>To</mat-label>
+        <mat-select formControlName="to">
+          <mat-option
+            *ngFor="let currency of currencies"
+            [value]="currency.code"
+            >{{ currency.name }}</mat-option
+          >
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <button
+      mat-raised-button
+      color="primary"
+      type="submit"
+      [disabled]="form.invalid"
+    >
+      Convert
+    </button>
+  </form>
+  <div *ngIf="resultString" class="result-string">
+    <span>{{ resultString.from }} =</span>
+    <span>{{ resultString.to }}</span>
+  </div>
+  <mat-card-footer>
+    <mat-progress-bar
+      *ngIf="calculatorService.loading | async"
+      mode="indeterminate"
+    ></mat-progress-bar>
+  </mat-card-footer>
+</mat-card>
